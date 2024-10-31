@@ -1,0 +1,341 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: #EFF6E0;
+}
+header {
+    background-color: transparent; 
+    overflow: hidden;
+    position: absolute; 
+    top: 0; 
+    width: 100%; 
+    z-index: 2; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 6rem;
+}
+.titulo{
+    background-color: #AEC3B0; 
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    position: absolute; 
+    padding: 1rem;
+    font-size: 1.3rem;
+    
+}
+
+.icono-menu button{
+    position: absolute; 
+    top: 2rem; 
+    right: 1.5rem; 
+    font-size: 2rem; 
+    color: #EFF6E0;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+.menu {
+    display: none; 
+    background-color: #052B39;
+    padding: 1rem;
+    position: absolute;
+    top: 4rem; 
+    right: 20px;
+    border-radius: 0rem;
+    box-shadow: 0 rgba(0, 0, 0, 0.1);
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    margin-bottom: 0.5rem;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #EFF6E0;
+}
+
+.menu ul li a:hover {
+    color : #EFF6E0;
+}
+
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 0; 
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+.contenido {
+    position: relative;
+    z-index: 2; 
+    padding: 1.2rem;
+    border-radius: 8px;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+p {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    padding: 1.2rem;
+    text-align: center; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    margin-top: 2rem;
+    background-color: #AEC3B0;
+    color: #EFF6E0;
+    text-decoration: none;
+    border-radius: 0rem;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #bdd4bf;
+}
+
+.fotografia-credito {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+    z-index: 2; 
+}
+
+.informacion-adicional {
+    height: 30vh;
+    display: none; /* Oculta la sección adicional por defecto */
+    position: relative;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out; /* Añade la animación */
+    align-content: center;
+    align-items: center;
+    background-color: black;
+    color: #EFF6E0;
+}
+.titulo4{
+    font-size: 2.5rem;
+    padding: 1rem;
+    margin-top: -1rem;
+    color: #EFF6E0;
+}
+.informacion{
+    padding: 1rem;
+    margin-top: -1rem;
+    font-size: 1.1rem;
+    color: #EFF6E0;
+}
+
+.informacion-adicional-2 {
+    height: 100vh;
+    display: none; /* Oculta la sección adicional por defecto */
+    position: relative;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out; /* Añade la animación */
+    align-content: center;
+    align-items: center;
+    color: #EFF6E0;
+    
+}
+.titulo-5{
+    font-size: 2.8rem;
+    padding: 1rem;
+    margin-top: 1rem;
+   
+}
+.informacion-2{
+    padding: -10rem;
+    margin-top: -1rem;
+    font-size: 1.3rem;
+}
+.img2 {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 0; 
+    filter: brightness(0.5) saturate(1.2) 
+            contrast(0.85);
+}
+.informacion-adicional-3 {
+    height: 30vh;
+    display: none; /* Oculta la sección adicional por defecto */
+    position: relative;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out; /* Añade la animación */
+    align-content: center;
+    align-items: center;
+    background-color: black;
+    color: #EFF6E0;
+}
+.titulo-6{
+    font-size: 2.5rem;
+    padding: 1rem;
+    margin-top: -1rem;
+    color: #EFF6E0;
+}
+.informacion-3{
+    padding: 1rem;
+    margin-top: -1rem;
+    font-size: 1.1rem;
+    color: #EFF6E0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container{
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    min-height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%; 
+    height: 100%;
+    background-color: black;
+}
+
+.card-grid{
+    display: grid;
+    gap: 20px; 
+    grid-template-columns: repeat(3, 1fr); 
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto;
+}
+
+.titulo3 {
+    
+    align-content: center;
+    align-items: center;
+    top: -4rem;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    font-size: 5rem;
+    color: #EFF6E0; 
+}
+
+.card{
+    position: relative;
+    width: 100%; 
+    height: 100%; 
+    margin-top: 10px;  
+}
+
+.card:before{
+  content: '';
+  display: block;
+  padding-bottom: 150%;
+  width: 100%;
+}
+
+.background{
+    background-position: center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0px;
+    bottom: 0;
+    filter: brightness(0.75) saturate(1.2) 
+            contrast(0.85);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 
+    filter 200ms linear,
+    transform 200ms linear;
+}
+    
+.card:hover .background{
+    transform: scale(1.05);    
+}
+    
+.card-grid:hover > .card:not(:hover) .background{
+    filter: brightness(0.6) saturate(1)
+    contrast(1.2)   blur(5px);
+}
+    
+.card-grid:hover > .card:not(:hover) .content{
+    filter: brightness(0.8) blur(2px);
+}
+    
+.content{
+    display: flex; 
+    justify-content: center;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+    
+.category{   
+    color: #AEC3B0;
+    font-family: Arial, sans-serif; 
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
