@@ -1,0 +1,133 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+    
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100%;
+  }
+  
+div{
+    color: #d3d3d3;
+    
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+  
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+   
+}
+  
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2em;
+    background-color: transparent;
+    border-radius: 5px;
+    width: 350px;
+    transition: .4s ease-in-out;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(2px);
+}
+  
+.form:hover {
+    transform: scale(1.05);
+    border: 1px solid black;
+}
+  
+.field {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    background-color: #171717;
+    box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+  
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+  
+}
+  
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: #d3d3d3;
+}
+  
+.btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+  
+  .button1 {
+    padding: .7rem 7rem;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #252525;
+    color: white;
+    cursor: pointer;
+}
+  
+.button1:hover, .button2:hover {
+    background-color: black;
+}
+  
+  /* Estilos adicionales */
+.input-field input {
+    color: white;
+    background: transparent;
+    border: none;
+    width: 100%;
+    outline: none;
+}
+  
+.text-white {
+    color: #fff;
+    text-decoration: none;
+}
+  
+.form-check-label, .forgot-password {
+    font-size: 0.9em;
+}
+  
+.forgot-password a {
+    color: white;
+    text-decoration: underline;
+}
+  
+.registro a {
+    color: white;
+    text-decoration: underline;
+    margin-top: 1.5rem;
+}

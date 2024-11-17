@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>  <!-- Enlazamos el archivo JS -->
+</head>
+<body>
+    <img src="/Register/imagen/tamara-gore-ldZrvy2SOEA-unsplash.jpg" alt="imagen">
+    <section class="formulario">
+        <h4>Formulario Registro</h4>
+        <input class="control" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre" required>
+        <input class="control" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido" required>
+        <input class="control" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" required>
+        <input class="control" type="password" name="contrasena" id="contrasena" placeholder="Ingrese su Contraseña" required>
+        
+        <label>
+            <input type="checkbox" name="terminos" required>
+            <p>Estoy de acuerdo con los términos y condiciones</p>
+        </label>
+        
+        <!-- Botón de registro -->
+        <input class="boton" type="submit" id="registrarBtn" value="Registrar">
+        
+        <p><a href="/login/login.html">¿Ya tengo Cuenta?</a></p>
+    </section>
+</body>
+</html>

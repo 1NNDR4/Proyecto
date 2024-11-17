@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 40px;
+    }
+}
+
+header {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+section {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    section {
+        width: calc(50% - 1rem);
+    }
+}
+
+h2 {
+    border-bottom: 2px solid #35424a;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #35424a;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #2c3840;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.toggle-btn {
+    background-color: #4CAF50;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.toggle-btn:hover {
+    background-color: #45a049;
+}
+
+.toggle-btn.active {
+    background-color: #f44336;
+}
+
+.toggle-btn.active:hover {
+    background-color: #d32f2f;
+}
+
+.section-content {
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 1000px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.section-content.hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
+#notificationList,
+#eventList {
+    margin-top: 1rem;
+}
+
+.notification-item,
+.event-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.notification-actions,
+.event-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#backToMain {
+    display: block;
+    margin: 2rem auto 0;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <header>
+        <h1>Panel de Administración</h1>
+    </header>
+    <main>
+        <section id="notificationSection">
+            <h2>Gestión de Notificaciones</h2>
+            <button id="toggleNotifications" class="toggle-btn">Mostrar/Ocultar Notificaciones</button>
+            <div class="section-content">
+                <form id="notificationForm">
+                    <h3>Crear Nueva Notificación</h3>
+                    <div>
+                        <label for="usuario">Usuario:</label>
+                        <select id="usuario" required></select>
+                    </div>
+                    <div>
+                        <label for="evento">Evento:</label>
+                        <select id="evento" required></select>
+                    </div>
+                    <div>
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea id="mensaje" required></textarea>
+                    </div>
+                    <button type="submit">Crear Notificación</button>
+                </form>
+                <div id="notificationList"></div>
+            </div>
+        </section>
+
+        <section id="eventSection">
+            <h2>Gestión de Eventos</h2>
+            <button id="toggleEvents" class="toggle-btn">Mostrar/Ocultar Eventos</button>
+            <div class="section-content">
+                <form id="eventForm">
+                    <h3>Crear/Editar Evento</h3>
+                    <div>
+                        <label for="eventName">Nombre del Evento:</label>
+                        <input type="text" id="eventName" required>
+                    </div>
+                    <div>
+                        <label for="eventDate">Fecha:</label>
+                        <input type="datetime-local" id="eventDate" required>
+                    </div>
+                    <div>
+                        <label for="eventPlace">Lugar:</label>
+                        <input type="text" id="eventPlace" required>
+                    </div>
+                    <div>
+                        <label for="eventDescription">Descripción:</label>
+                        <textarea id="eventDescription" required></textarea>
+                    </div>
+                    <button type="submit">Guardar Evento</button>
+                </form>
+                <div id="eventList"></div>
+            </div>
+        </section>
+    </main>
+    <button id="backToMain" class="btn-secondary">Volver a la página principal</button>
+    <script src="admin-script.js"></script>
+</body>
