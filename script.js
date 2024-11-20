@@ -106,50 +106,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Funciones de autenticación de usuario
-    function checkUserLoggedIn() {
-        const token = localStorage.getItem('token');
-        return token !== null && !isTokenExpired(token);
+    
+    // Funciones de autenticación
+    function verificarUsuarioConectado() {
+        const token = localStorage.getItem('jwt_token');
+        return token !== null && !tokenExpirado(token);
     }
 
-    function isTokenExpired(token) {
-        // Implementar aquí la lógica de verificación de expiración del token
-        // Por ahora, asumiremos que el token siempre es válido
-        return false;
-    }
-
-    function getUsername() {
-        return localStorage.getItem('username') || 'Usuario desconocido';
-    }
-
-    function updateSessionMessage() {
-        const sessionMessage = document.getElementById('session-message');
-        if (checkUserLoggedIn()) {
-            sessionMessage.textContent = 'Sesión iniciada con la cuenta: ' + getUsername();
-        } else {
-            sessionMessage.textContent = 'No has iniciado sesión';
+    function tokenExpirado(token) {
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            const tiempoExpiracion = payload.exp * 1000; // Convertir a milisegundos
+            return Date.now() >= tiempoExpiracion;
+        } catch (error) {
+            console.error('Error al verificar la expiración del token:', error);
+            return true; // Asume que el token ha expirado si hay un error
         }
     }
 
-    function logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        updateSessionMessage();
+    function obtenerNombreUsuario() {
+        const token = localStorage.getItem('jwt_token');
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                return payload.email || 'Usuario desconocido';
+            } catch (error) {
+                console.error('Error al decodificar el token:', error);
+            }
+        }
+        return 'Usuario desconocido';
+    }
+
+    function actualizarMensajeSesion() {
+        if (verificarUsuarioConectado()) {
+            mensajeSesion.textContent = 'Sesión iniciada con la cuenta: ' + obtenerNombreUsuario();
+        } else {
+            mensajeSesion.textContent = 'No has iniciado sesión';
+        }
+    }
+
+    function cerrarSesion() {
+        localStorage.removeItem('jwt_token');
+        localStorage.removeItem('tipo_usuario');
+        actualizarMensajeSesion();
+        window.location.href = '/index.html';
     }
 
     // Inicializar mensaje de sesión
-    updateSessionMessage();
+    actualizarMensajeSesion();
 
     // Manejar clic en el botón de reporte
-    reportButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        if (checkUserLoggedIn()) {
+    botonReporte.addEventListener('click', function(evento) {
+        evento.preventDefault();
+        if (verificarUsuarioConectado()) {
             window.location.href = './Reportes/index.html';
         } else {
             window.location.href = './login/login.html';
         }
     });
 
-    // Exponer la función de cierre de sesión globalmente
-    window.logout = logout;
+    // Verificar si el usuario acaba de iniciar sesión y actualizar la UI en consecuencia
+    const parametrosURL = new URLSearchParams(window.location.search);
+    if (parametrosURL.get('login') === 'exitoso') {
+        actualizarMensajeSesion();
+        history.replaceState(null, '', window.location.pathname); // Eliminar parámetro de consulta
+    }
+
+    // Exponer función de cierre de sesión globalmente
+    window.cerrarSesion = cerrarSesion;
+
+    // ... (resto del código existente de la página principal)
 });

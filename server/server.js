@@ -274,16 +274,17 @@ app.get('/denuncias', authenticateToken, async (req, res) => {
 
 // Ruta para crear una nueva denuncia
 app.post('/denuncias', authenticateToken, async (req, res) => {
-  const { usuario_id, descripcion, fecha, estado } = req.body;
+  const { descripcion } = req.body;
+  const usuario_id = req.user.usuario_id; // Obtenemos el ID del usuario del token
 
-  if (!usuario_id || !descripcion || !fecha || !estado) {
-    return res.status(400).json({ message: 'Faltan datos requeridos' });
+  if (!descripcion) {
+    return res.status(400).json({ message: 'La descripción es requerida' });
   }
 
   try {
     const [result] = await db.query(
-      'INSERT INTO Denuncia (usuario_id, descripcion, fecha, estado) VALUES (?, ?, ?, ?)',
-      [usuario_id, descripcion, fecha, estado]
+      'INSERT INTO Denuncia (usuario_id, descripcion) VALUES (?, ?)',
+      [usuario_id, descripcion]
     );
     res.status(201).json({ message: 'Denuncia creada', id: result.insertId });
   } catch (error) {
@@ -291,23 +292,31 @@ app.post('/denuncias', authenticateToken, async (req, res) => {
   }
 });
 
-// Ruta para actualizar una denuncia
+// Ruta para actualizar el estado de una denuncia (solo para admin)
 app.put('/denuncias/:id', authenticateToken, async (req, res) => {
+  if (req.user.tipo_usuario !== 'admin') {
+    return res.status(403).json({ message: 'Acceso denegado' });
+  }
+
   const { id } = req.params;
-  const { descripcion, fecha, estado } = req.body;
+  const { estado } = req.body;
   try {
     await db.query(
-      'UPDATE Denuncia SET descripcion = ?, fecha = ?, estado = ? WHERE denuncia_id = ?',
-      [descripcion, fecha, estado, id]
+      'UPDATE Denuncia SET estado = ? WHERE denuncia_id = ?',
+      [estado, id]
     );
-    res.json({ message: 'Denuncia actualizada' });
+    res.json({ message: 'Estado de la denuncia actualizado' });
   } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar la denuncia' });
+    res.status(500).json({ error: 'Error al actualizar el estado de la denuncia' });
   }
 });
 
-// Ruta para eliminar una denuncia
+// Ruta para eliminar una denuncia (solo para admin)
 app.delete('/denuncias/:id', authenticateToken, async (req, res) => {
+  if (req.user.tipo_usuario !== 'admin') {
+    return res.status(403).json({ message: 'Acceso denegado' });
+  }
+
   const { id } = req.params;
   try {
     await db.query('DELETE FROM Denuncia WHERE denuncia_id = ?', [id]);

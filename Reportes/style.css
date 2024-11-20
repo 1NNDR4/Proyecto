@@ -1,69 +1,104 @@
-/* styles.css */
+/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    line-height: 1.5;
 }
 
-.denuncia {
-    padding: 20px 40px;
-    border-radius: 8px;
-    width: 400px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(2px);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-img{
+/* Estilos para el formulario */
+.form-container {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+textarea {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    resize: vertical;
 }
 
-
-.denuncia h1 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #fff6f6;
+button {
+    transition: background-color 0.3s ease;
 }
 
-form label {
-    display: block;
-    text-align: left;
-    margin-bottom: 8px;
-    color: #fffcfc;
+button:hover {
+    opacity: 0.9;
 }
 
-form input,
-form textarea,
-form select,
-form button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-form textarea {
-    resize: none;
-}
-
-form button {
-    background-color: #16637a;
-    color: white;
-    border: none;
-    cursor: pointer;
+/* Estilos para mensajes */
+#mensaje {
+    padding: 1rem;
+    border-radius: 0.25rem;
     font-weight: bold;
 }
 
-form button:hover {
-    background-color: #1ba196;
+/* Estilos para la sección de administración */
+#adminSection {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.denuncia-item {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.denuncia-item:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos responsivos */
+@media (max-width: 640px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .form-container, #adminSection {
+        padding: 1rem;
+    }
+}
+
+/* Mejoras de accesibilidad */
+:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Animaciones suaves */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
 }

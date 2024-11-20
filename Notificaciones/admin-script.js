@@ -8,9 +8,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const notificationSection = document.getElementById('notificationSection');
     const eventSection = document.getElementById('eventSection');
     const backToMainButton = document.getElementById('backToMain');
+    const loginForm = document.getElementById('loginForm');
+    const loginButton = document.getElementById('loginButton');
 
     let notifications = [];
     let events = [];
+
+    function getToken() {
+        return localStorage.getItem('token');
+    }
+
+    async function iniciarSesion(email, contraseña) {
+        try {
+            const respuesta = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, contraseña })
+            });
+
+            if (!respuesta.ok) {
+                throw new Error('Error en el inicio de sesión');
+            }
+
+            const datos = await respuesta.json();
+            localStorage.setItem('token', datos.token);
+            
+            // Ocultar el formulario de login y mostrar el contenido principal
+            loginForm.style.display = 'none';
+            notificationSection.style.display = 'block';
+            eventSection.style.display = 'block';
+
+            // Cargar los datos
+            loadUsers();
+            loadEvents();
+            loadNotifications();
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error en el inicio de sesión');
+        }
+    }
 
     // Funcionalidad para desplegar secciones
     toggleNotifications.addEventListener('click', function() {
@@ -39,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${getToken()}`
                 },
                 body: JSON.stringify({ usuario_id: usuario, evento_id: evento, mensaje }),
             });
@@ -57,7 +96,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadNotifications() {
         try {
-            const response = await fetch('http://localhost:3000/notificaciones');
+            const response = await fetch('http://localhost:3000/notificaciones', {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            });
             if (!response.ok) {
                 throw new Error('Error al cargar las notificaciones');
             }
@@ -98,7 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const notificationId = e.target.getAttribute('data-id');
         try {
             const response = await fetch(`http://localhost:3000/notificaciones/${notificationId}/read`, {
-                method: 'PUT'
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             });
             if (!response.ok) {
                 throw new Error('Error al actualizar la notificación');
@@ -114,7 +160,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const notificationId = e.target.getAttribute('data-id');
         try {
             const response = await fetch(`http://localhost:3000/notificaciones/${notificationId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             });
             if (!response.ok) {
                 throw new Error('Error al eliminar la notificación');
@@ -148,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${getToken()}`
                     },
                     body: JSON.stringify(eventData),
                 });
@@ -156,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${getToken()}`
                     },
                     body: JSON.stringify(eventData),
                 });
@@ -176,7 +227,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function loadEvents() {
         try {
-            const response = await fetch('http://localhost:3000/eventos');
+            const response = await fetch('http://localhost:3000/eventos', {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            });
             if (!response.ok) {
                 throw new Error('Error al cargar eventos');
             }
@@ -242,7 +297,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const eventId = e.target.getAttribute('data-id');
         try {
             const response = await fetch(`http://localhost:3000/eventos/${eventId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
             });
             if (!response.ok) {
                 throw new Error('Error al eliminar el evento');
@@ -257,7 +315,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Cargar usuarios y eventos
     async function loadUsers() {
         try {
-            const response = await fetch('http://localhost:3000/usuarios');
+            const response = await fetch('http://localhost:3000/usuarios', {
+                headers: {
+                    'Authorization': `Bearer ${getToken()}`
+                }
+            });
             if (!response.ok) {
                 throw new Error('Error al cargar usuarios');
             }
@@ -277,12 +339,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Inicializar la carga de datos
-    loadUsers();
-    loadEvents();
-    loadNotifications();
+    if (getToken()) {
+        loadUsers();
+        loadEvents();
+        loadNotifications();
+    } else {
+        notificationSection.style.display = 'none';
+        eventSection.style.display = 'none';
+    }
 
     // Funcionalidad para volver a la página principal
-    backToMainButton.addEventListener('click', function() {
-        window.location.href = '/index.html'; // Asegúrate de que esta sea la ruta correcta a tu página principal
+    document.addEventListener('DOMContentLoaded', function () {
+        const backToMainButton = document.getElementById('backToMain');
+    
+        if (backToMainButton) {
+            backToMainButton.addEventListener('click', function () {
+                window.location.href = '/index.html'; // Cambia esta ruta si es necesario
+            });
+        } else {
+            console.error('El botón "Volver a la página principal" no se encontró.');
+        }
     });
+
 });
